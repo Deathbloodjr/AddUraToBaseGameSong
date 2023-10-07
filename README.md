@@ -18,3 +18,7 @@
  using We Are's ura chart as an example
  
  It does not matter if the chart files are gzipped or not, but they can't be encrypted
+
+
+ 
+[My other mods](https://docs.google.com/spreadsheets/d/1fuAAfK-0Vw74TwxXF5WVy1fh1ADsVzUkDd7dOHc7EdQ)
