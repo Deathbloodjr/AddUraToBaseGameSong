@@ -1,5 +1,8 @@
 # AddUraToBaseGameSong
  A mod for TDMX to add ura charts to base game songs.
+ | Mono | IL2CPP |
+|:--:|:--:|
+|✅|✅|
 
 # How to use
  In the UraChartPath folder set in the config file, there will be a folder for each song getting an ura chart added\
@@ -21,4 +24,6 @@
 
 
  
-[My other mods](https://docs.google.com/spreadsheets/d/1fuAAfK-0Vw74TwxXF5WVy1fh1ADsVzUkDd7dOHc7EdQ)
+[My other mods](https://docs.google.com/spreadsheets/d/1fuAAfK-0Vw74TwxXF5WVy1fh1ADsVzUkDd7dOHc7EdQ)\
+[My Taiko Discord Server](https://discord.gg/6Bjf2xP)
+
