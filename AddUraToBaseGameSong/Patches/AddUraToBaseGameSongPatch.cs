@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using LightWeightJsonParser;
 #if TAIKO_IL2CPP
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 #endif
@@ -10,7 +11,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
-using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -42,14 +42,14 @@ namespace AddUraToBaseGameSong.Patches
                 if (dataFiles.Length > 0)
                 {
                     var file = dataFiles[0];
-                    var node = JsonNode.Parse(File.ReadAllText(file.FullName));
+                    var node = LWJson.Parse(File.ReadAllText(file.FullName));
                     ChartData data = new ChartData();
-                    data.SongId = node["SongId"].GetValue<string>();
-                    data.IsBranch = node["Branch"].GetValue<bool>();
-                    data.Stars = node["Stars"].GetValue<int>();
-                    data.Points = node["Points"].GetValue<int>();
-                    data.PointsDuet = node["PointsDuet"].GetValue<int>();
-                    data.Score = node["Score"].GetValue<int>();
+                    data.SongId = node["SongId"].AsString();
+                    data.IsBranch = node["Branch"].AsBoolean();
+                    data.Stars = node["Stars"].AsInteger();
+                    data.Points = node["Points"].AsInteger();
+                    data.PointsDuet = node["PointsDuet"].AsInteger();
+                    data.Score = node["Score"].AsInteger();
 
                     data.HasDuet = false;
                     if (File.Exists(Path.Combine(subDirs[i].FullName, data.SongId, data.SongId + "_x_1.bin")) &&
