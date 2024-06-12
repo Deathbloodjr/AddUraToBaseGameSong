@@ -9,6 +9,7 @@ namespace AddUraToBaseGameSong.Patches
     internal class ChartData
     {
         public string SongId { get; set; }
+        public string DirectoryPath { get; set; }
         public bool IsBranch { get; set; }
         public int Stars { get; set; }
         public int Points { get; set; }
