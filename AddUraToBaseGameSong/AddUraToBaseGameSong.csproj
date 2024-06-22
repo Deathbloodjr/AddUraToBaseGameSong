@@ -32,12 +32,12 @@
     <TargetFramework Condition="$(DefineConstants.Contains('TAIKO_MONO'))">net48</TargetFramework>
     <AssemblyName>com.DB.AddUraToBaseGameSong</AssemblyName>
     <Description>A mod for TDMX to add ura charts to base game songs.</Description>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>AddUraToBaseGameSong</RootNamespace>
     <PackageId>AddUraToBaseGameSong</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.1.1</PackageVersion>
     <Configurations>Release-IL2CPP;Release-Mono;Debug-IL2CPP;Debug-Mono</Configurations>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>

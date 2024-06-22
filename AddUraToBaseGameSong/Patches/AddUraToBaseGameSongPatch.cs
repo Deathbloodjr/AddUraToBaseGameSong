@@ -41,29 +41,29 @@ namespace AddUraToBaseGameSong.Patches
             if (File.Exists(configFilePath))
             {
                 var lines = File.ReadAllLines(configFilePath).ToList();
-                bool foundCustomSongsCategory = false;
-                bool customSongsEnabled = false;
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    if (lines[i].StartsWith("[CustomSongs]"))
-                    {
-                        foundCustomSongsCategory = true;
-                        continue;
-                    }
-                    if (foundCustomSongsCategory && lines[i].StartsWith("EnableCustomSongs"))
-                    {
-                        var value = lines[i].Remove(0, lines[i].IndexOf("=") + 1).Trim();
+                //bool foundCustomSongsCategory = false;
+                //bool customSongsEnabled = false;
+                //for (int i = 0; i < lines.Count; i++)
+                //{
+                //    if (lines[i].StartsWith("[CustomSongs]"))
+                //    {
+                //        foundCustomSongsCategory = true;
+                //        continue;
+                //    }
+                //    if (foundCustomSongsCategory && lines[i].StartsWith("EnableCustomSongs"))
+                //    {
+                //        var value = lines[i].Remove(0, lines[i].IndexOf("=") + 1).Trim();
 
-                        if (value == "true")
-                        {
-                            customSongsEnabled = true;
-                            break;
-                        }
-                    }
-                }
-                if (customSongsEnabled)
-                {
-                    foundCustomSongsCategory = false;
+                //        if (value == "true")
+                //        {
+                //            customSongsEnabled = true;
+                //            break;
+                //        }
+                //    }
+                //}
+                //if (customSongsEnabled)
+                //{
+                    bool foundCustomSongsCategory = false;
                     // Do a separate for loop in case SongDirectory is before EnableCustomSongs (somehow, I think it has to be in alphabetical order though)
                     for (int i = 0; i < lines.Count; i++)
                     {
@@ -80,62 +80,19 @@ namespace AddUraToBaseGameSong.Patches
                             break;
                         }
                     }
-                }
+                //}
             }
 
             AddUraToMusicInfoAccessers(__instance);
         }
 
-        //private static void MusicDataInterface_Postfix_New_Function(MusicDataInterface __instance, string uraPath, bool isTakoTako = false)
-        //{
-        //    DirectoryInfo dirInfo = new DirectoryInfo(uraPath);
-        //    var dataFiles = dirInfo.GetFiles("data_ura.json", SearchOption.AllDirectories).ToList();
-        //    //if (isTakoTako)
-        //    //{
-        //    //    dataFiles.AddRange(dirInfo.GetFiles("data.json", SearchOption.AllDirectories).ToList());
-        //    //}
-        //    for (int i = 0; i < dataFiles.Count; i++)
-        //    {
-        //        var file = dataFiles[i];
-        //        var node = LWJson.Parse(File.ReadAllText(file.FullName));
-        //        ChartData data = new ChartData();
-        //        data.SongId = node["SongId"].AsString();
-        //        data.IsBranch = node["Branch"].AsBoolean();
-        //        data.Stars = node["Stars"].AsInteger();
-        //        data.Points = node["Points"].AsInteger();
-        //        data.PointsDuet = node["PointsDuet"].AsInteger();
-        //        data.Score = node["Score"].AsInteger();
-
-        //        data.HasDuet = false;
-        //        if (File.Exists(Path.Combine(dataFiles[i].DirectoryName, data.SongId + "_x_1.bin")) &&
-        //            File.Exists(Path.Combine(dataFiles[i].DirectoryName, data.SongId + "_x_2.bin")))
-        //        {
-        //            data.HasDuet = true;
-        //        }
-
-
-        //        if (!UraCharts.ContainsKey(data.SongId) && File.Exists(Path.Combine(dataFiles[i].DirectoryName, data.SongId + "_x.bin")))
-        //        {
-        //            UraCharts.Add(data.SongId, data);
-        //        }
-        //    }
-
-
-        //    for (int i = 0; i < __instance.musicInfoAccessers.Count; i++)
-        //    {
-        //        if (UraCharts.ContainsKey(__instance.musicInfoAccessers[i].Id))
-        //        {
-        //            var data = UraCharts[__instance.musicInfoAccessers[i].Id];
-        //            __instance.musicInfoAccessers[i].Stars[4] = data.Stars;
-        //            __instance.musicInfoAccessers[i].ShinutiScores[4] = data.Points;
-        //            __instance.musicInfoAccessers[i].ShinutiScoreDuets[4] = data.PointsDuet;
-        //            __instance.musicInfoAccessers[i].Scores[4] = data.Score;
-        //        }
-        //    }
-        //}
 
         private static void PopulateUraCharts(string uraPath, bool isTakoTako = false)
         {
+            if (!Directory.Exists(uraPath))
+            {
+                return;
+            }
             DirectoryInfo dirInfo = new DirectoryInfo(uraPath);
             var dataFiles = dirInfo.GetFiles("data_ura.json", SearchOption.AllDirectories).ToList();
             if (!isTakoTako)
